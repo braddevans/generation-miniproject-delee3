@@ -16,6 +16,7 @@ class JsonDatabase:
         if self.checkExists(databaseFile):
             self.readFile()
         else:
+            self.init()
             self.writeFile()
             self.readFile()
 
