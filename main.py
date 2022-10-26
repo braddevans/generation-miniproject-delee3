@@ -1,6 +1,7 @@
 import time
 
-from Handlers.MainMenuHandler import MainMenuHandler
+from tabulate import tabulate
+
 from Handlers.ProductMenuHandler import ProductMenuHandler
 from utils.JsonDatabase import JsonDatabase
 
@@ -10,7 +11,7 @@ if __name__ == '__main__':
     database = JsonDatabase()
 
     will_exit = False
-    menu = MainMenuHandler()
+    menu = tabulate([['Product Management', 1], ['exit', 0]], headers=['Menu Options', 'Option Number'], tablefmt="outline")
 
     while not will_exit:
         time.sleep(0.005)
