@@ -23,14 +23,14 @@ class JsonDatabase:
 
     def write_path(self, path, value):
         # string split
-        curr = self.db
+        curr = {}
         for key in path:
             if key not in curr:
                 curr[key] = {}
             curr = curr[key]
         k, v = value
         curr[k] = v
-        self.db = curr
+        self.db.update(curr)
         self.writeFile()
 
     def getDB(self):
