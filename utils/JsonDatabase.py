@@ -20,7 +20,6 @@ class JsonDatabase:
             self.writeFile()
             self.readFile()
 
-
     def write_path(self, path, value):
         # string split
         curr = {}
