@@ -21,81 +21,67 @@ class OrdersMenuHandler:
             ['UPDATE existing order', 4],
             ['DELETE order', 5]
         ]
-        self.Orderdictlist = []
-        self.kvdict = {}
+        self.OrderDict = []
+        self.KVDict = {}
         print(tabulate(self.defaultlist, headers=['Order Management Manu', 'Option Number'], tablefmt="outline"))
 
         # print(self.dcm)
         for item in self.db.getDB()["orders"]:
             index = self.db.getDB()["orders"].index(item)
             index += 1
-            self.kvdict[index] = item
+            self.KVDict[index] = item
             # print(f"Adding: k:{index}, v:{item}")
-            self.Orderdictlist.append([item, index])
+            self.OrderDict.append([item, index])
 
         self.open_menu(int(input("please input your order option: ") or "0"))
 
     def open_menu(self, _input):
+        # regenerate the self.OrderDict using the below function to get the new values from the database file
         self.recreate_list()
+
         if _input == 5:
             # STRETCH GOAL - DELETE order
-            # PRINT orders list
-            # GET user input for order index value
-            # DELETE order at index in order list
-            print(tabulate(self.Orderdictlist, headers=['Order Management Manu', 'Option Number'], tablefmt="outline"))
+            print(tabulate(self.OrderDict, headers=['Order Management Manu', 'Option Number'], tablefmt="outline"))
             self.remove_from_db(int(input("please input your order you want to delete: ")))
             self.default_return()
+
         if _input == 4:
             # # STRETCH - UPDATE existing order
-            #
-            #         PRINT orders list with its index values
-            #         GET user input for order index value
-            #         FOR EACH key-value pair in selected order:
-            #             GET user input for updated property
-            #             IF user input is blank:
-            #                 do not update this property
-            #             ELSE:
-            #                 update the property value with user input
-            print(tabulate(self.Orderdictlist, headers=['Order Management Manu', 'Option Number'], tablefmt="outline"))
-            orderID = int(input("please input your order id to update: "))
-            orderName = input("please input your new order name [default: press enter]: ") or "default"
-            orderAddress = input("please input your new order Address [default: press enter]: ") or "default"
-            orderPhoneNumber = input("please input your new order phoneNumber [default: press enter]: ") or "default"
-            self.update_order_by_id(orderID, name=orderName, address=orderAddress, PhoneNumber=orderPhoneNumber)
-            print(tabulate(self.Orderdictlist, headers=['Order Management Manu', 'Order Number'], tablefmt="outline"))
+            print(tabulate(self.OrderDict, headers=['Order Management Manu', 'Option Number'], tablefmt="outline"))
+            order_id = int(input("please input your order id to update: "))
+            order_name = input("please input your new order name [default: press enter]: ") or "default"
+            order_address = input("please input your new order Address [default: press enter]: ") or "default"
+            order_phone_number = input("please input your new order phoneNumber [default: press enter]: ") or "default"
+            self.update_order_by_id(order_id, name=order_name, address=order_address, PhoneNumber=order_phone_number)
+            print(tabulate(self.OrderDict, headers=['Order Management Manu', 'Order Number'], tablefmt="outline"))
             self.default_return()
+
         elif _input == 3:
             # STRETCH GOAL - UPDATE existing product
-            # PRINT order names with its index value
-            # GET user input for order index value
-            # GET user input for new order name
-            # UPDATE order name at index in products list
-            print(tabulate(self.Orderdictlist, headers=['Order Management Manu', 'Option Number'], tablefmt="outline"))
-            orderID = int(input("please input your order id to update: "))
+            print(tabulate(self.OrderDict, headers=['Order Management Manu', 'Option Number'], tablefmt="outline"))
+            order_id = int(input("please input your order id to update: "))
             print(f"order \nid: type\n {json.dumps(self.orderTypes, indent=2, sort_keys=True)}")
-            orderStatusID = int(input("please input your new order status id: "))
-            self.update_order_status_by_id(orderID, orderStatusID)
+            order_status_id = int(input("please input your new order status id: "))
+            self.update_order_status_by_id(order_id, order_status_id)
             self.default_return()
+
         elif _input == 2:
             # Create Order
-            # GET user input for customer name
-            # GET user input for customer address
-            # GET user input for customer phone number
-            # SET order status to be 'PREPARING'
-            # APPEND order to orders list
             self.create_order(input("please input your name: "), input("please input your address: "), input("please input your Phone Number: "))
-            print(tabulate(self.Orderdictlist, headers=['Order Management Manu', 'Order Number'], tablefmt="outline"))
+            print(tabulate(self.OrderDict, headers=['Order Management Manu', 'Order Number'], tablefmt="outline"))
             self.default_return()
+
         elif _input == 1:
             # PRINT products list
-            print(tabulate(self.Orderdictlist, headers=['Order Management Manu', 'Order Number'], tablefmt="outline"))
+            print(tabulate(self.OrderDict, headers=['Order Management Manu', 'Order Number'], tablefmt="outline"))
             self.default_return()
+
         elif _input == 0:
             # RETURN to main menu
             return 0
 
-    def create_order(self, name, address, phoneNum):
-        self.db.getDB()["orders"].append({"name": name, "address": address, "PhoneNumber": phoneNum, "status": self.orderTypes[1]})
+    def create_order(self, name, address, phone_number):
+        self.db.getDB()["orders"].append({"name": name, "address": address, "PhoneNumber": phone_number, "status": self.orderTypes[1]})
         self.db.writeFile()
         self.recreate_list()
 
@@ -118,15 +104,15 @@ class OrdersMenuHandler:
         self.recreate_list()
 
     def recreate_list(self):
-        self.Orderdictlist.clear()
-        self.kvdict = {}
+        self.OrderDict.clear()
+        self.KVDict = {}
         # print(self.dcm)
         for item in self.db.getDB()["orders"]:
             index = self.db.getDB()["orders"].index(item)
             index += 1
-            self.kvdict[index] = item
+            self.KVDict[index] = item
             # print(f"Adding: k:{index}, v:{item}")
-            self.Orderdictlist.append([item, index])
+            self.OrderDict.append([item, index])
 
     def __repr__(self):
         return 0
