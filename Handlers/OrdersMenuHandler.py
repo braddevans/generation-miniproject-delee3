@@ -7,11 +7,10 @@ class OrdersMenuHandler:
     def __init__(self, dcm):
         self.db = dcm
 
-        self.orderTypes = {
-            0: "DECLINED",
-            1: "CONFIRMED",
-            2: "PENDING"
-        }
+        self.orderTypes = [
+            "DECLINED",
+            "CONFIRMED",
+            "PENDING"]
 
         self.defaultlist = [
             ['Return to Main Menu', 0],
@@ -67,7 +66,8 @@ class OrdersMenuHandler:
 
         elif _input == 2:
             # Create Order
-            self.create_order(input("please input your name: "), input("please input your address: "), input("please input your Phone Number: "))
+            self.create_order(input("please input your name: "), input("please input your address: "),
+                              input("please input your Phone Number: "))
             print(tabulate(self.OrderDict, headers=['Order Management Manu', 'Order Number'], tablefmt="outline"))
             self.default_return()
 
