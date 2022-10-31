@@ -4,64 +4,66 @@ from tabulate import tabulate
 class ProductMenuHandler:
     def __init__(self, dcm):
         self.db = dcm
+        self.defaultlist = [
+            ['Return to Main Menu', 0],
+            ['PRINT products list', 1],
+            ['CREATE new product', 2],
+            ['UPDATE existing product', 3],
+            ['DELETE product', 4]
+        ]
+        self.ProductList = []
 
-        self.defaultlist = [['Return to Main Menu', 0], ['PRINT products list', 1], ['CREATE new product', 2], ['UPDATE existing product', 3], ['DELETE product', 4]]
-        self.prodictlist = []
-        self.kvdict = {}
         print(tabulate(self.defaultlist, headers=['Menu Options', 'Option Number'], tablefmt="outline"))
-
-        # print(self.dcm)
-        for item in self.db.getDB()["products"]:
-            index = self.db.getDB()["products"].index(item)
-            index += 1
-            self.kvdict[index] = item
-            # print(f"Adding: k:{index}, v:{item}")
-            self.prodictlist.append([item, index])
-
         self.open_menu(int(input("please input your product option: ")))
 
+    #
+    # menu loop
+    #
     def open_menu(self, _input):
+        self.recreate_list()
         if _input == 4:
             # STRETCH GOAL - DELETE product
             # PRINT products list
             # GET user input for product index value
             # DELETE product at index in products list
-            self.recreate_list()
-            print(tabulate(self.prodictlist, headers=['Menu Options', 'Option Number'], tablefmt="outline"))
+            print(tabulate(self.ProductList, headers=['Menu Options', 'Option Number'], tablefmt="outline"))
             self.remove_from_list(int(input("please input your product you want to delete: ")))
             print(tabulate(self.defaultlist, headers=['Menu Options', 'Option Number'], tablefmt="outline"))
             self.open_menu(int(input("please input your product option: ")))
-            pass
+
         elif _input == 3:
             # STRETCH GOAL - UPDATE existing product
             # PRINT product names with its index value
             # GET user input for product index value
             # GET user input for new product name
             # UPDATE product name at index in products list
-            self.recreate_list()
-            print(tabulate(self.prodictlist, headers=['Menu Options', 'Option Number'], tablefmt="outline"))
+            print(tabulate(self.ProductList, headers=['Menu Options', 'Option Number'], tablefmt="outline"))
             self.update_list(int(input("please input your updated product id: ")), input("please input your updated product name: "))
             print(tabulate(self.defaultlist, headers=['Menu Options', 'Option Number'], tablefmt="outline"))
             self.open_menu(int(input("please input your product option: ")))
-            pass
+
         elif _input == 2:
             # CREATE new product
             # GET user input for product name
             # APPEND product name to products list
             self.add_to_list(input("please input your product name: "))
-            print(tabulate(self.prodictlist, headers=['Menu Options', 'Option Number'], tablefmt="outline"))
+            print(tabulate(self.ProductList, headers=['Menu Options', 'Option Number'], tablefmt="outline"))
             print(tabulate(self.defaultlist, headers=['Menu Options', 'Option Number'], tablefmt="outline"))
             self.open_menu(int(input("please input your product option: ")))
-            pass
+
         elif _input == 1:
             # PRINT products list
-            self.recreate_list()
-            print(tabulate(self.prodictlist, headers=['Menu Options', 'Option Number'], tablefmt="outline"))
+            print(tabulate(self.ProductList, headers=['Menu Options', 'Option Number'], tablefmt="outline"))
             print(tabulate(self.defaultlist, headers=['Menu Options', 'Option Number'], tablefmt="outline"))
             self.open_menu(int(input("please input your product option: ")))
+
         elif _input == 0:
-            # RETURN to main menu
+            # RETURN to main menu [goto __repr__()]
             return 0
+
+    #
+    # functions
+    #
 
     def add_to_list(self, item):
         self.db.getDB()["products"].append(item)
@@ -83,15 +85,13 @@ class ProductMenuHandler:
         pass
 
     def recreate_list(self):
-        self.prodictlist.clear()
-        self.kvdict = {}
+        self.ProductList.clear()
         # print(self.dcm)
         for item in self.db.getDB()["products"]:
             index = self.db.getDB()["products"].index(item)
             index += 1
-            self.kvdict[index] = item
-            # print(f"Adding: k:{index}, v:{item}")
-            self.prodictlist.append([item, index])
+            self.ProductList.append([item, index])
 
+    # return pointer for class
     def __repr__(self):
         return 0
