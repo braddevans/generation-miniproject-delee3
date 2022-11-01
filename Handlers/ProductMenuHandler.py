@@ -14,7 +14,7 @@ class ProductMenuHandler:
         self.ProductList = []
 
         print(tabulate(self.defaultlist, headers=['Menu Options', 'Option Number'], tablefmt="outline"))
-        self.open_menu(int(input("please input your product option: ")))
+        self.open_menu(int(input("please input your product option: ") or "0"))
 
     #
     # menu loop
@@ -55,7 +55,7 @@ class ProductMenuHandler:
             # PRINT products list
             print(tabulate(self.ProductList, headers=['Menu Options', 'Option Number'], tablefmt="outline"))
             print(tabulate(self.defaultlist, headers=['Menu Options', 'Option Number'], tablefmt="outline"))
-            self.open_menu(int(input("please input your product option: ")))
+            self.open_menu(int(input("please input your product option: ") or "0"))
 
         elif _input == 0:
             # RETURN to main menu [goto __repr__()]

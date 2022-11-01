@@ -1,10 +1,5 @@
 import pendulum
 
-
-def timestamp():
-    return str(pendulum.from_timestamp(pendulum.now("Europe/London").timestamp())).replace("T", " ").split(".")[0] + " UTC"
-
-
 colors = {
     "magenta": '\033[95m',
     "blue": '\033[94m',
@@ -20,17 +15,21 @@ colors = {
 
 
 class Logging:
-    def __init__(self, prefix):
+    def __init__(self, prefix: str, should_log: bool):
+        self.should_log = should_log
         self.prefix = prefix
-        self.debug(f"Logger initialised")
+        if self.should_log:
+            self.debug(f"Logger initialised")
 
     # Format: [YYYY-MM-DD HH:MM:SS UTC]
+    def timestamp(self):
+        return str(pendulum.from_timestamp(pendulum.now("Europe/London").timestamp())).replace("T", " ").split(".")[0] + " UTC"
 
     def info(self, message):
-        print(f"{colors['blue']}[INFO]  [{timestamp()}] [{self.prefix}]: {message} {colors['reset']}")
+        print(f"{colors['blue']}[INFO]  [{self.timestamp()}] [{self.prefix}]: {message} {colors['reset']}")
 
     def debug(self, message):
-        print(f"{colors['green']}[DEBUG] [{timestamp()}] [{self.prefix}]: {message} {colors['reset']}")
+        print(f"{colors['green']}[DEBUG] [{self.timestamp()}] [{self.prefix}]: {message} {colors['reset']}")
 
     def error(self, message):
-        print(f"{colors['red']}[ERROR] [{timestamp()}] [{self.prefix}]: {message} {colors['reset']}")
+        print(f"{colors['red']}[ERROR] [{self.timestamp()}] [{self.prefix}]: {message} {colors['reset']}")
