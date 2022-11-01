@@ -15,7 +15,8 @@ colors = {
 
 
 class Logging:
-    def __init__(self, prefix: str, should_log: bool):
+    # initialise class with [input class name] and [should it log the initial debug] the class should [return nothing]
+    def __init__(self, prefix: str, should_log: bool) -> None:
         self.should_log = should_log
         self.prefix = prefix
         if self.should_log:
