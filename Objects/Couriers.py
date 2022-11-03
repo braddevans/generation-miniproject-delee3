@@ -46,7 +46,6 @@ class Couriers:
         # print(self.dcm)
         for item in self.db.getDB()["couriers"]:
             index = self.db.getDB()["couriers"].index(item)
-            index = self.db.getDB()["couriers"].index(item)
             index += 1
             self.CouriersDict.append([item, index])
 
