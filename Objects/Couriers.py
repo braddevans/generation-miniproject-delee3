@@ -18,8 +18,7 @@ class Couriers:
 
     def create_courier(self, name):
         self.db.getDB()["couriers"].append({
-            "name": name,
-            "created_at": self.logUtil.timestamp()
+            "name": name
         })
         self.db.writeFile()
         self.regenerate_couriers()
@@ -28,7 +27,6 @@ class Couriers:
         for key, value in kwargs.items():
             if not value == "default":
                 self.db.getDB()["couriers"][index - 1].update({f"{key}": value})
-        self.db.getDB()["couriers"][index - 1].update({"updated_at": self.logUtil.timestamp()})
         self.db.writeFile()
         self.regenerate_couriers()
 

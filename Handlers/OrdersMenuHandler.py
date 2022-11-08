@@ -3,6 +3,7 @@ import json
 from tabulate import tabulate
 
 from Objects.Order import Order
+from Objects.Product import Product
 
 
 class OrdersMenuHandler:
@@ -14,10 +15,16 @@ class OrdersMenuHandler:
             ['CREATE new order', 2],
             ['UPDATE existing order status', 3],
             ['UPDATE existing order', 4],
-            ['DELETE order', 5]
+            ['DELETE order', 5],
+            [' ', None],
+            [' ', None],
+            ['Dev Options:', None],
+            ['Print order items', 11],
+            ['ADD order items', 12]
         ]
         # create order handler class passing in the json database
         self.orders = Order(self.db)
+        self.products = Product(self.db)
 
         print(tabulate(self.defaultlist, headers=['Order Management Manu', 'Option Number'], tablefmt="outline"))
 
@@ -26,6 +33,23 @@ class OrdersMenuHandler:
     def open_menu(self, _input):
         # regenerate the self.OrderDict using the below function to get the new values from the database file
         self.orders.regenerate_orders()
+        if _input == 12:
+            # get order items
+            self.orders.print_orders()
+
+            order_id = int(input("please input your order id: "))
+            self.products.print_products()
+            order_items = input("please input your order items e.g.  1,2,3,4: ").split(",")
+            self.orders.add_items_to_order_by_id(order_id, order_items)
+            self.default_return()
+
+        if _input == 11:
+            # get order items
+            self.orders.print_orders()
+
+            order_id = int(input("please input your order id: "))
+            self.orders.print_order_items_by_order_id(order_id)
+            self.default_return()
 
         if _input == 5:
             # STRETCH GOAL - DELETE order
