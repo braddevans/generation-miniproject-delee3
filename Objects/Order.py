@@ -74,7 +74,7 @@ class Order:
             print(
                 f"_object: {_object} \n"
                 f"index: {index}, \n"
-                f"self.orderTypes.__len__(): {self.orderTypes.__len__()}"
+                f"_object.__len__(): {_object.__len__()}"
             )
         if (index > (_object.__len__() + 1)) or (index < 1):
             if self.DEBUG:
