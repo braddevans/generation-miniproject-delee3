@@ -1,5 +1,3 @@
-from random import randint
-
 from tabulate import tabulate
 
 from Objects.Product import Product

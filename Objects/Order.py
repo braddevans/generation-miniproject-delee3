@@ -51,10 +51,8 @@ class Order:
         self.db.getDB()["orders"][order_id - 1].update({"items": db_items})
         self.db.writeFile()
 
-
     def get_order_by_id(self, order_id):
         return self.db.getDB()["orders"][order_id - 1]
-
 
     def update_order_status_by_id(self, index, types):
         if self.check_within_range(self.orderTypes, types):
@@ -91,7 +89,6 @@ class Order:
 
     def getTypes(self):
         return self.orderTypes
-
 
     def print_order_items_by_order_id(self, order_id):
         order = self.get_order_by_id(order_id)

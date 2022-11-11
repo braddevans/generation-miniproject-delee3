@@ -1,6 +1,5 @@
 import json
 import os
-import sys
 
 databaseFile = "database.json"
 

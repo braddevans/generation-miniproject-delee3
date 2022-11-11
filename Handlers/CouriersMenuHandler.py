@@ -1,5 +1,3 @@
-import json
-
 from tabulate import tabulate
 
 from Objects.Couriers import Couriers
@@ -38,7 +36,7 @@ class CouriersMenuHandler:
 
             # take user input into variables but use a default return of "default" if the user doesn't input anything
             courier_id = int(input("please input your courier id to update: "))
-            courier_name = input("please input your new courier name [default: press enter]: ") or "default"
+            courier_name = input("please input your new courier name [if ⏎, will be left unchanged]: ") or "default"
 
             # update the courier using the above input variables taken from the user into a kwargs dict to be looped over in the next function
             self.couriers.update_courier_by_id(courier_id, name=courier_name)

@@ -63,9 +63,9 @@ class OrdersMenuHandler:
 
             # take user input into variables but use a default return of "default" if the user doesn't input anything
             order_id = int(input("please input your order id to update: "))
-            order_name = input("please input your new order name [default: press enter]: ") or "default"
-            order_address = input("please input your new order Address [default: press enter]: ") or "default"
-            order_phone_number = input("please input your new order phoneNumber [default: press enter]: ") or "default"
+            order_name = input("please input your new order name [if ⏎, will be left unchanged]: ") or "default"
+            order_address = input("please input your new order Address [if ⏎, will be left unchanged]: ") or "default"
+            order_phone_number = input("please input your new order phoneNumber [if ⏎, will be left unchanged]: ") or "default"
 
             # update the order using the above input variables taken from the user into a kwargs dict to be looped over in the next function
             self.orders.update_order_by_id(order_id, name=order_name, address=order_address, PhoneNumber=order_phone_number)
