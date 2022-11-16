@@ -3,12 +3,14 @@ from random import randint
 
 from tabulate import tabulate
 
+from Handlers.CSVIOHandler import CSVIOHandler
 from Handlers.CouriersMenuHandler import CouriersMenuHandler
 from Handlers.OrdersMenuHandler import OrdersMenuHandler
 from Handlers.ProductMenuHandler import ProductMenuHandler
 from Objects.Product import Product
 from utils.JsonDatabase import JsonDatabase
-
+from utils.Logging import Logging
+from utils.MysqlDatabase import MysqlDatabase
 
 def gen_initial_db():
     prod_list = [
@@ -27,6 +29,8 @@ def gen_initial_db():
 if __name__ == '__main__':
     # test database insert, select, update, delete
     database = JsonDatabase()
+    # database = MysqlDatabase(Logging("MysqlDB", False))
+    # database.database_query_with_debug("INSERT INTO person (first_name, last_name, age, email) VALUES ('test','testUser',99,'test@test.com')")
     products = Product(database)
 
     if products.ProductDict.__len__() < 1:
@@ -37,6 +41,7 @@ if __name__ == '__main__':
         ['Product Management', 1],
         ['Orders Management', 2],
         ['Courier Management', 3],
+        ['CSV_IO Management', 4],
         ['exit', 0]
     ], headers=['Menu Options', 'Option Number'], tablefmt="outline")
 
@@ -52,6 +57,8 @@ if __name__ == '__main__':
             userinput = OrdersMenuHandler(database)
         elif userinput == 3:
             userinput = CouriersMenuHandler(database)
+        elif userinput == 4:
+            userinput = CSVIOHandler(database)
         else:
             userinput = int(input("please input your option: "))
 

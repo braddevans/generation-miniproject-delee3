@@ -23,6 +23,7 @@ class Product:
             "price": price,
         })
         self.db.writeFile()
+        self.db.readFile()
         self.regenerate_products()
 
     def update_product_by_id(self, index, **kwargs):
@@ -30,6 +31,7 @@ class Product:
             if not value == "default":
                 self.db.getDB()["products"][index - 1].update({f"{key}": value})
         self.db.writeFile()
+        self.db.readFile()
         self.regenerate_products()
 
     def remove_from_db(self, index):
@@ -37,6 +39,7 @@ class Product:
             print(f"index: {index - 1}, removedItem: {self.db.getDB()['products'][index - 1]}")
             self.db.getDB()["products"].pop(index - 1)
             self.db.writeFile()
+            self.db.readFile()
             self.regenerate_products()
         else:
             print(f"please use a value between [1 and {self.db.getDB()['products'].__len__()}]")
@@ -48,6 +51,9 @@ class Product:
             index = self.db.getDB()["products"].index(item)
             index += 1
             self.ProductDict.append([item, index])
+
+    def get_product_by_id(self, product_id):
+        return self.db.getDB()["products"][product_id]
 
     # check if given value is within items index range
     def check_within_range(self, _object, index):

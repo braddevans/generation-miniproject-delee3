@@ -9,6 +9,7 @@ class Couriers:
         self.db = db
         self.CouriersDict = []
         self.logUtil = Logging("Couriers", False)
+        self.regenerate_couriers()
 
     def getCouriers(self):
         return self.CouriersDict
@@ -21,6 +22,7 @@ class Couriers:
             "name": name
         })
         self.db.writeFile()
+        self.db.readFile()
         self.regenerate_couriers()
 
     def update_courier_by_id(self, index, **kwargs):
@@ -28,6 +30,8 @@ class Couriers:
             if not value == "default":
                 self.db.getDB()["couriers"][index - 1].update({f"{key}": value})
         self.db.writeFile()
+        self.db.readFile()
+        self.db.readFile()
         self.regenerate_couriers()
 
     def remove_from_db(self, index):
@@ -35,9 +39,13 @@ class Couriers:
             print(f"index: {index - 1}, removedItem: {self.db.getDB()['couriers'][index - 1]}")
             self.db.getDB()["couriers"].pop(index - 1)
             self.db.writeFile()
+            self.db.readFile()
             self.regenerate_couriers()
         else:
             print(f"please use a value between [1 and {self.db.getDB()['couriers'].__len__()}]")
+
+    def get_courier_by_id(self, courier_id):
+        return self.db.getDB()["couriers"][courier_id]
 
     def regenerate_couriers(self):
         self.CouriersDict.clear()
