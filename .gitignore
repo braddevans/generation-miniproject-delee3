@@ -83,3 +83,7 @@ config.json
 database.json
 
 /venv/
+!/couriers.csv
+!/orders.csv
+!/products.csv
+!/.env
