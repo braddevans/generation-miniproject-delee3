@@ -71,7 +71,7 @@ class CSVIOHandler:
             self.csv_write("products.csv", self.product_headers, self.product_list)
 
             self.db.writeFile()
-            self.db.readFile()
+
             self.default_return()
 
         elif _input == 1:
@@ -86,7 +86,7 @@ class CSVIOHandler:
                     self.products.remove_from_db(i)
 
             self.db.writeFile()
-            self.db.readFile()
+
             self.default_return()
 
         elif _input == 0:

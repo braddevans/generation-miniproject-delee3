@@ -1,18 +1,16 @@
 import json
 import os
 
-databaseFile = "database.json"
-
 
 class JsonDatabase:
-    def __init__(self):
+    def __init__(self, dbFile="database.json"):
+        self.databaseFile = dbFile.replace("/", os.sep).replace("\\", os.sep)
         self.db = {
             "products": [],
             "orders": [],
             "couriers": []
         }
-
-        if self.checkExists(databaseFile):
+        if self.checkExists(self.databaseFile):
             self.readFile()
         else:
             self.writeFile()
@@ -37,11 +35,10 @@ class JsonDatabase:
         return os.path.exists(os.getcwd() + os.sep + file)
 
     def readFile(self):
-        with open(databaseFile) as database_file:
+        with open(self.databaseFile) as database_file:
             self.db = json.load(database_file)
 
     def writeFile(self):
-        with open(databaseFile, "w") as outfile:
+        with open(self.databaseFile, "w") as outfile:
             outfile.write(json.dumps(self.db, indent=2, sort_keys=True))
-
         self.readFile()

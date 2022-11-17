@@ -37,13 +37,12 @@ class Order:
             "created_at": self.logUtil.timestamp()
         })
         self.db.writeFile()
-        self.db.readFile()
+
         self.regenerate_orders()
 
     def assign_random_courier(self, order_id):
         self.db.getDB()["orders"][order_id - 1].update({"courier": randint(0, self.couriers.getCouriers().__len__() - 1)})
         self.db.writeFile()
-        self.db.readFile()
 
     def add_items_to_order_by_id(self, order_id, items):
         db_items = self.db.getDB()["orders"][order_id - 1]["items"]
@@ -53,7 +52,6 @@ class Order:
         print(db_items)
         self.db.getDB()["orders"][order_id - 1].update({"items": db_items})
         self.db.writeFile()
-        self.db.readFile()
 
     def get_order_by_id(self, order_id):
         return self.db.getDB()["orders"][order_id]
@@ -62,7 +60,7 @@ class Order:
         if self.check_within_range(self.orderTypes, types):
             self.db.getDB()["orders"][index - 1].update({"status": self.orderTypes[types - 1]})
             self.db.writeFile()
-            self.db.readFile()
+
             self.regenerate_orders()
         else:
             print(f"please use a value between [1 and {self.orderTypes.__len__()}]")
@@ -73,7 +71,7 @@ class Order:
                 self.db.getDB()["orders"][index - 1].update({f"{key}": value})
         self.db.getDB()["orders"][index - 1].update({"updated_at": self.logUtil.timestamp()})
         self.db.writeFile()
-        self.db.readFile()
+
         self.regenerate_orders()
 
     def remove_from_db(self, index):
@@ -81,7 +79,7 @@ class Order:
             print(f"index: {index - 1}, removedItem: {self.db.getDB()['orders'][index - 1]}")
             self.db.getDB()["orders"].pop(index - 1)
             self.db.writeFile()
-            self.db.readFile()
+
             self.regenerate_orders()
         else:
             print(f"please use a value between [1 and {self.db.getDB()['orders'].__len__()}]")

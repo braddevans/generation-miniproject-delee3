@@ -22,7 +22,7 @@ class Couriers:
             "name": name
         })
         self.db.writeFile()
-        self.db.readFile()
+
         self.regenerate_couriers()
 
     def update_courier_by_id(self, index, **kwargs):
@@ -30,8 +30,7 @@ class Couriers:
             if not value == "default":
                 self.db.getDB()["couriers"][index - 1].update({f"{key}": value})
         self.db.writeFile()
-        self.db.readFile()
-        self.db.readFile()
+
         self.regenerate_couriers()
 
     def remove_from_db(self, index):
@@ -39,7 +38,7 @@ class Couriers:
             print(f"index: {index - 1}, removedItem: {self.db.getDB()['couriers'][index - 1]}")
             self.db.getDB()["couriers"].pop(index - 1)
             self.db.writeFile()
-            self.db.readFile()
+
             self.regenerate_couriers()
         else:
             print(f"please use a value between [1 and {self.db.getDB()['couriers'].__len__()}]")

@@ -67,6 +67,3 @@ class MysqlDatabase:
                 cursor.close()
                 pool.close()
                 self.logger.info("MySQL connection has been closed")
-
-
-

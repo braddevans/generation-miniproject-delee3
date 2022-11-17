@@ -9,8 +9,7 @@ from Handlers.OrdersMenuHandler import OrdersMenuHandler
 from Handlers.ProductMenuHandler import ProductMenuHandler
 from Objects.Product import Product
 from utils.JsonDatabase import JsonDatabase
-from utils.Logging import Logging
-from utils.MysqlDatabase import MysqlDatabase
+
 
 def gen_initial_db():
     prod_list = [
@@ -23,7 +22,6 @@ def gen_initial_db():
         random_price = (randint(10, 100) / 100)
         products.create_product(item, random_price)
     database.writeFile()
-    database.readFile()
 
 
 if __name__ == '__main__':
