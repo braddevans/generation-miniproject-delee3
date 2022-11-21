@@ -33,6 +33,7 @@ class OrdersMenuHandler:
     def open_menu(self, _input):
         # regenerate the self.OrderDict using the below function to get the new values from the database file
         self.orders.regenerate_orders()
+
         if _input == 12:
             # get order items
             self.orders.print_orders()

@@ -27,8 +27,6 @@ def gen_initial_db():
 if __name__ == '__main__':
     # test database insert, select, update, delete
     database = JsonDatabase()
-    # database = MysqlDatabase(Logging("MysqlDB", False))
-    # database.database_query_with_debug("INSERT INTO person (first_name, last_name, age, email) VALUES ('test','testUser',99,'test@test.com')")
     products = Product(database)
 
     if products.ProductDict.__len__() < 1:
@@ -59,5 +57,3 @@ if __name__ == '__main__':
             userinput = CSVIOHandler(database)
         else:
             userinput = int(input("please input your option: "))
-
-        pass

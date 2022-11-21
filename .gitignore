@@ -87,3 +87,4 @@ database.json
 !/orders.csv
 !/products.csv
 !/.env
+!/.pytest_cache/
