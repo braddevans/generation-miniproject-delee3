@@ -14,9 +14,9 @@ class Order:
         self.logUtil = Logging("Order", False)
         self.couriers = Couriers(self.db)
         self.orderTypes = [
-            "PENDING",
-            "DECLINED",
-            "CONFIRMED"
+            "PREPARING",
+            "OUT_FOR_DELIVERY",
+            "DELIVERED"
         ]
         self.regenerate_orders()
 

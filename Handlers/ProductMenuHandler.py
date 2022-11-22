@@ -46,7 +46,7 @@ class ProductMenuHandler:
 
             # take user input
             product_id = int(input("please input your product id [if ⏎, will be left unchanged]: "))
-            product_name = int(input("please input your product name [if ⏎, will be left unchanged]: "))
+            product_name = input("please input your product name [if ⏎, will be left unchanged]: ")
             product_price = int(input("please input your product price [if ⏎, will be left unchanged]: "))
 
             self.products.update_product_by_id(product_id, name=product_name, price=product_price)
