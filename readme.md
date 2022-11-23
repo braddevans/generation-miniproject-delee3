@@ -9,14 +9,25 @@
 ## How did you meet the client brief?:
 ###### (UNDERSTANDING CLIENT SPECIFICATION/REQUIREMENTS)
 
-
+ - They want to maintain a collection of products and couriers.
+ - When a customer makes a new order, We need to create this on the system.
+ - We need to be able to update the status of an order [preparing, out-for-delivery, delivered].
+ - When We exit my app, We need all data to be persisted and not lost.
+ - When We start my app, We need to load all persisted data.
+ - We need to be sure my app has been tested and proven to work well.
+ - We Need to regularly update the app with updates
 
 ## How did you guarantee the client requirements?
 
 ###### (TESTING)
 ```shell
- - Pytests
+ - Pytests:
+   - Database Tests
+   - Order Tests
+   - Courier Tests
+   - Product Tests
 ```
+
 
 
 ## If you had more time, what is one thing you would improve upon?
